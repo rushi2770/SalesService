@@ -28,18 +28,18 @@ namespace SalesService.Controllers
         
         public ActionResult GetCustomerByName(string name)
         {
-            SalesService.Models.Customer custmerById;
+            SalesService.Models.Customer custmerByName;
             using (var salesDBEntities = new SalesDBEntities())
             {
                 var customerFromDatabase = salesDBEntities.Customers.FirstOrDefault(item =>  item.FirstName.Contains(name) || item.LastName.Contains(name));
                 if (customerFromDatabase == null)
                 {
                 }
-                custmerById = new Models.Customer() { FirstName = customerFromDatabase.FirstName, CustomerID = customerFromDatabase.CustomerID, LastName = customerFromDatabase.LastName, MiddleInitial = customerFromDatabase.MiddleInitial };
+                custmerByName = new Models.Customer() { FirstName = customerFromDatabase.FirstName, CustomerID = customerFromDatabase.CustomerID, LastName = customerFromDatabase.LastName, MiddleInitial = customerFromDatabase.MiddleInitial };
 
             }
             var result = new JsonResult();
-            result.Data = custmerById;
+            result.Data = custmerByName;
             return result;
         }
     }
