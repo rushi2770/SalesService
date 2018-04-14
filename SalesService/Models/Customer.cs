@@ -12,5 +12,17 @@ namespace SalesService.Models
         public string FirstName { get; set; }
         public string MiddleInitial { get; set; }
         public string LastName { get; set; }
+
+        public Customer()
+        {
+
+        }
+        public Customer(SalesService.Customer data)
+        {
+            CustomerID = data.CustomerID;
+            FirstName = data.FirstName;
+            MiddleInitial = data.MiddleInitial;
+            LastName = data.LastName;
+        }
     }
 }

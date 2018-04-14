@@ -25,13 +25,13 @@ namespace SalesService.Controllers
             result.Data = custmerById;
             return result;
         }
-        
+
         public ActionResult GetCustomerByName(string name)
         {
             SalesService.Models.Customer custmerByName;
             using (var salesDBEntities = new SalesDBEntities())
             {
-                var customerFromDatabase = salesDBEntities.Customers.FirstOrDefault(item =>  item.FirstName.Contains(name) || item.LastName.Contains(name));
+                var customerFromDatabase = salesDBEntities.Customers.FirstOrDefault(item => item.FirstName.Contains(name) || item.LastName.Contains(name));
                 if (customerFromDatabase == null)
                 {
                 }
