@@ -14,19 +14,24 @@ namespace SalesService.Controllers
         {
             using (SalesDBEntities db = new SalesDBEntities())
             {
-                Models.EmployeeModel employee;
+                #region commented Code
+                // Models.EmployeeModel employee;
                 //var config = new MapperConfiguration(cfg =>
                 //{
-                //    cfg.CreateMap<Models.EmployeeModel, Employee>();
+                //    cfg.CreateMap<Employee, Models.EmployeeModel>();
                 //});
+
                 //IMapper mapper = config.CreateMapper();
                 ////var employeeFromDB = new Employee();
-                var employeeFromDB = db.Employees.FirstOrDefault(item => item.EmployeeID == id);
+
                 //var employeeModel = mapper.Map<Models.EmployeeModel, Employee>(employeeFromDB);
-                employee = new Models.EmployeeModel() {EmployeeID = employeeFromDB.EmployeeID,
-                    FirstName = employeeFromDB.FirstName, LastName = employeeFromDB.LastName, MiddleInitial =  employeeFromDB.MiddleInitial  };
-                 
-                return Ok(employee);
+                //employee = new Models.EmployeeModel() {EmployeeID = employeeFromDB.EmployeeID,
+                // FirstName = employeeFromDB.FirstName, LastName = employeeFromDB.LastName, MiddleInitial =  employeeFromDB.MiddleInitial  }; 
+                #endregion
+
+                var sourceEmployee = db.Employees.FirstOrDefault(item => item.EmployeeID == id);
+                var destionationEmployeeModel = Mapper.Map<Models.EmployeeModel>(sourceEmployee);
+                return Ok(destionationEmployeeModel);
             }
 
         }
@@ -37,9 +42,6 @@ namespace SalesService.Controllers
             Models.EmployeeModel employee;
             using (SalesDBEntities db = new SalesDBEntities())
             {
-
-
-               // var employeeFromDB = db.Employees.FirstOrDefault(i => i.LastName == id);
                 var employeeFromDB = db.Employees.FirstOrDefault(item => item.FirstName.Contains(id) || item.LastName.Contains(id));
                 employee = new Models.EmployeeModel()
                 {
@@ -48,8 +50,6 @@ namespace SalesService.Controllers
                     LastName = employeeFromDB.LastName,
                     MiddleInitial = employeeFromDB.MiddleInitial
                 };
-
-                
             }
             return Ok(employee);
         }

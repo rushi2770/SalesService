@@ -12,44 +12,44 @@ using SalesService;
 
 namespace SalesService.Controllers
 {
-    public class EmployeesWithSFController : ApiController
+    public class ProductSFController : ApiController
     {
         private SalesDBEntities db = new SalesDBEntities();
 
-        // GET: api/EmployeesWithSF
-        public IQueryable<Employee> GetEmployees()
+        // GET: api/ProductSF
+        public IQueryable<Product> GetProducts()
         {
-            return db.Employees;
+            return db.Products;
         }
 
-        // GET: api/EmployeesWithSF/5
-        [ResponseType(typeof(Employee))]
-        public IHttpActionResult GetEmployee(int id)
+        // GET: api/ProductSF/5
+        [ResponseType(typeof(Product))]
+        public IHttpActionResult GetProduct(int id)
         {
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            Product product = db.Products.Find(id);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return Ok(employee);
+            return Ok(product);
         }
 
-        // PUT: api/EmployeesWithSF/5
+        // PUT: api/ProductSF/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutEmployee(int id, Employee employee)
-            {
+        public IHttpActionResult PutProduct(int id, Product product)
+        {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != employee.EmployeeID)
+            if (id != product.ProductID)
             {
                 return BadRequest();
             }
 
-            db.Entry(employee).State = EntityState.Modified;
+            db.Entry(product).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace SalesService.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EmployeeExists(id))
+                if (!ProductExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +70,35 @@ namespace SalesService.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/EmployeesWithSF
-        [ResponseType(typeof(Employee))]
-        public IHttpActionResult PostEmployee(Employee employee)
+        // POST: api/ProductSF
+        [ResponseType(typeof(Product))]
+        public IHttpActionResult PostProduct(Product product)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Employees.Add(employee);
+            db.Products.Add(product);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = employee.EmployeeID }, employee);
+            return CreatedAtRoute("DefaultApi", new { id = product.ProductID }, product);
         }
 
-        // DELETE: api/EmployeesWithSF/5
-        [ResponseType(typeof(Employee))]
-        public IHttpActionResult DeleteEmployee(int id)
+        // DELETE: api/ProductSF/5
+        [ResponseType(typeof(Product))]
+        public IHttpActionResult DeleteProduct(int id)
         {
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            Product product = db.Products.Find(id);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            db.Employees.Remove(employee);
+            db.Products.Remove(product);
             db.SaveChanges();
 
-            return Ok(employee);
+            return Ok(product);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +110,9 @@ namespace SalesService.Controllers
             base.Dispose(disposing);
         }
 
-        private bool EmployeeExists(int id)
+        private bool ProductExists(int id)
         {
-            return db.Employees.Count(e => e.EmployeeID == id) > 0;
+            return db.Products.Count(e => e.ProductID == id) > 0;
         }
     }
 }

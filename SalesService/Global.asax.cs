@@ -13,6 +13,9 @@ namespace SalesService
     {
         protected void Application_Start()
         {
+            //To Intialize the Automapper profiles that are defined in ApplicationProfile.cs
+            AutoMapper.Mapper.Initialize(
+                cfg => cfg.AddProfile<Utility.Profiles.ApplicationProfile>());
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

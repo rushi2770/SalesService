@@ -224,6 +224,8 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeesWithSFController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProductSFController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>SalesModel.tt</DependentUpon>
@@ -239,6 +241,7 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>SalesModel.tt</DependentUpon>
     </Compile>
@@ -264,6 +267,7 @@
       <DependentUpon>SalesModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Utility\Profiles\ApplicationProfile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
