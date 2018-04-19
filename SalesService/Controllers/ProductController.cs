@@ -34,7 +34,6 @@ namespace SalesService.Controllers
         }
 
         //GET: api/product/1
-
         public IHttpActionResult GetProduct(int id)
         {
             using (SalesDBEntities db = new SalesDBEntities())
@@ -71,14 +70,12 @@ namespace SalesService.Controllers
             }
         }
 
-        [HttpPut]
-        public IHttpActionResult EditProduct(int id, Product product)
+        public IHttpActionResult PutProduct(int id, Product product)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
             if (id != product.ProductID)
             {
                 return BadRequest();
@@ -86,42 +83,22 @@ namespace SalesService.Controllers
             using (SalesDBEntities db = new SalesDBEntities())
             {
                 var productFromDb = db.Products.FirstOrDefault(x => x.ProductID == id);
-                //productFromDb = AutoMapper.Mapper.Map<ProductModel, Product>(product);
-                //db.Entry(product).State = EntityState.Modified;
-                if(productFromDb != null)
+                if (productFromDb != null)
                 {
+                    //productFromDb = AutoMapper.Mapper.Map<ProductModel, Product>(product);
                     productFromDb.Price = product.Price;
                     productFromDb.Name = product.Name;
+                    //db.Entry(product).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
-                    return StatusCode(HttpStatusCode.NoContent);
                 }
                 else
                 {
                     return NotFound();
-                }         
-            }
-            
-        }
+                }
 
-        #region I got the same error as PUT method.
-        //[HttpDelete]
-        //public IHttpActionResult RemoveProduct(int productId)
-        //{
-        //    using(SalesDBEntities db = new SalesDBEntities())
-        //    {
-        //        var productToDelete = db.Products.FirstOrDefault(x => x.ProductID == productId);
-        //        if(productToDelete != null)
-        //        {
-        //            db.Products.Remove(productToDelete);
-        //            db.SaveChanges();
-        //            return Ok(productToDelete);
-        //        }else
-        //        {
-        //            return NotFound();
-        //        }
-        //    }
-        //} 
-        #endregion
+            }
+            return StatusCode(HttpStatusCode.NoContent);
+        }
 
         public IHttpActionResult DeleteProduct(int id)
         {
@@ -140,30 +117,6 @@ namespace SalesService.Controllers
                 }
             }
         }
-        #region GotError stating that The requested resource does not support http method 'DELETE'.
-        //public IHttpActionResult PutProduct(int productId, Product product)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    if (productId != product.ProductID)
-        //    {
-        //        return BadRequest();
-        //    }
-        //    using (SalesDBEntities db = new SalesDBEntities())
-        //    {
-        //        //var productFromDb = db.Products.FirstOrDefault(x => x.ProductID == productId);
 
-        //            //productFromDb = AutoMapper.Mapper.Map<ProductModel, Product>(product);
-        //            //productFromDb.Price = product.Price;
-        //            //productFromDb.Name = product.Name;
-        //            db.Entry(product).State = System.Data.Entity.EntityState.Modified;
-        //            db.SaveChanges();
-
-        //    }
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //} 
-        #endregion
     }
 }

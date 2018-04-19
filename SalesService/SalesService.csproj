@@ -225,7 +225,6 @@
     <Compile Include="Controllers\EmployeesWithSFController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\ProductSFController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>SalesModel.tt</DependentUpon>
@@ -242,6 +241,7 @@
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\SaleModel.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>SalesModel.tt</DependentUpon>
     </Compile>

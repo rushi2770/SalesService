@@ -37,7 +37,7 @@ namespace SalesService.Controllers
         }
 
         [HttpGet, Route("getbyname/{id}", Name = "getemployeebyname")]
-        public IHttpActionResult GetEmployeeByID(string id)
+        public IHttpActionResult GetEmployeeByName(string id)
         {
             Models.EmployeeModel employee;
             using (SalesDBEntities db = new SalesDBEntities())
