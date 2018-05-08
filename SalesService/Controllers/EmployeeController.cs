@@ -5,11 +5,37 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using AutoMapper;
+using System.Web.Http.Cors;
+
 namespace SalesService.Controllers
 {
     [RoutePrefix("api/employee")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class EmployeeController : ApiController
     {
+        [HttpGet, Route("getAllEmployees", Name = "getAllEmployees")]
+        
+        public IHttpActionResult GetEmployees()
+        {
+            using(SalesDBEntities db = new SalesDBEntities())
+            {
+                var employeeList = db.Employees.ToList();
+                List<Models.EmployeeModel> employeeModelList = new List<Models.EmployeeModel>();
+                foreach(var item in employeeList)
+                {
+                    Models.EmployeeModel employeeModel = new Models.EmployeeModel()
+                    {
+                        EmployeeID = item.EmployeeID,
+                        FirstName = item.FirstName,
+                        MiddleInitial = item.MiddleInitial,
+                        LastName = item.LastName
+                    };
+                    employeeModelList.Add(employeeModel);
+                }
+                return Ok(employeeModelList);
+            }
+        }
+        [HttpGet, Route("getById/{id}", Name = "getemployeebyId")]
         public IHttpActionResult GetEmployeeByID(int id)
         {
             using (SalesDBEntities db = new SalesDBEntities())
@@ -36,7 +62,7 @@ namespace SalesService.Controllers
 
         }
 
-        [HttpGet, Route("getbyname/{id}", Name = "getemployeebyname")]
+        [HttpGet, Route("getByName/{id}", Name = "getemployeebyname")]
         public IHttpActionResult GetEmployeeByName(string id)
         {
             Models.EmployeeModel employee;

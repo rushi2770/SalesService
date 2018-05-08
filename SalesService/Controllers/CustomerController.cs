@@ -5,11 +5,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
+using System.Web.Http.Cors;
 
 namespace SalesService.Controllers
 {
     [RoutePrefix("api/Customer")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class CustomerController : ApiController
     {
         //[HttpGet]

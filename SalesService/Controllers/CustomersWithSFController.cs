@@ -9,9 +9,12 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using SalesService;
+using System.Web.Http.Cors;
+using AutoMapper;
 
 namespace SalesService.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class CustomersWithSFController : ApiController
     {
         private SalesDBEntities db = new SalesDBEntities();
@@ -23,7 +26,7 @@ namespace SalesService.Controllers
         }
 
         // GET: api/CustomersWithSF/5
-        [ResponseType(typeof(SalesService.Models.Customer))]
+        //[ResponseType(typeof(SalesService.Models.Customer))]
         public IHttpActionResult GetCustomer(int id)
         {
             Customer customer = db.Customers.Find(id);
@@ -31,8 +34,10 @@ namespace SalesService.Controllers
             {
                 return NotFound();
             }
-
-            return Ok(new SalesService.Models.Customer(customer));
+            //var sourceEmployee = db.Employees.FirstOrDefault(item => item.EmployeeID == id);
+            var destionationCustomerModel = Mapper.Map<Models.Customer>(customer);
+            return Ok(destionationCustomerModel);
+           // return Ok(new SalesService.Models.Customer(customer));
         }
 
         // PUT: api/CustomersWithSF/5

@@ -8,18 +8,26 @@ using SalesService.Models;
 using System.Web.Http.Description;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Web.Http.Cors;
 
 namespace SalesService.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ProductController : ApiController
     {
         //GET: api/product
+        /// <summary>
+        /// Gets All the Products present in the SalesDB.
+        ///[ApiExplorerSettings(IgnoreApi=true)] 
+        ///If we use the above attribute the this method is hidden from documentation
+        /// </summary>
+
         public IHttpActionResult GetAllProducts()
         {
             using(SalesDBEntities db = new SalesDBEntities())
             {
                 var productsFromDB = db.Products.ToList();
-                List<Models.ProductModel> product = new List<Models.ProductModel>();
+                List<Models.ProductModel> products = new List<Models.ProductModel>();
                 
                 foreach(var item in productsFromDB)
                 {
@@ -27,9 +35,9 @@ namespace SalesService.Controllers
                     model.ProductID = item.ProductID;
                     model.Name = item.Name;
                     model.Price = item.Price;
-                    product.Add(model);
+                    products.Add(model);
                 }
-                return Ok(product);
+                return Ok(products);
             } 
         }
 

@@ -17,6 +17,7 @@ namespace SalesService
             AutoMapper.Mapper.Initialize(
                 cfg => cfg.AddProfile<Utility.Profiles.ApplicationProfile>());
             AreaRegistration.RegisterAllAreas();
+
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
