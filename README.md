@@ -4,7 +4,7 @@ SalesService project is a Web API project that has been developed for the Sales 
 
 /*
 
-* Project: E-Commerce Website Sample
+* Project: SalesService Web API
 * Author: Rushikesh Chikka
 * All rights reserved. */
 
